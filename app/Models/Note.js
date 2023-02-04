@@ -7,7 +7,7 @@ export class Note{
         this.title = data.title
         this.color = data.color
         this.body = data.body || ''
-        this.date = data.date
+        this.date = data.date || new Date().toLocaleTimeString('en-US')
 
     }
 
@@ -25,7 +25,7 @@ export class Note{
                     <textarea type="text" class="form-control" name="body" id="noteBody" placeholder="Start a new note...">${this.body}</textarea>
                 </div>
                 <div class="col-1 p-0 text-center">
-                <button class="btn btn-danger mdi mdi-trash-can-outline fs-3 mt-2"></button>
+                <button class="btn btn-danger mdi mdi-trash-can-outline fs-3 mt-2" onclick="app.notesController.deleteNote('${this.id}')"></button>
                 </div>
             </div>
         </div>

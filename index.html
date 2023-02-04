@@ -75,8 +75,10 @@
       </div> -->
     </div>
     <form onsubmit="app.notesController.createNote()">
-        <div class="d-flex">
-          <input type="text" class="form" name="title" id="noteTitle" placeholder="Title" required><input type="color" id="color" name="color" value="#e66465">
+        <div class="d-flex justify-content-between">
+          <input type="text" class="form" name="title" id="noteTitle" placeholder="Title" required>
+          <input type="color" class="color-picker" id="color" name="color" value="#0000ff">
+          <button type="submit" class="btn btn-success text-light mdi mdi-note-plus-outline" data-bs-dismiss="offcanvas"></button>
         </div>
       </form>
   </div>

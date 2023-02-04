@@ -6,3 +6,6 @@ textarea{
     overflow-y: auto;
 }
 
+.color-picker{
+    height: auto;
+}

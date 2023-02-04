@@ -8,8 +8,6 @@ import { setHTML } from "../Utils/Writer.js";
 function _drawActiveNote(){
     console.log('draw notes function firing');
     let note = appState.activeNote
-    // let template = ''
-    // notes.forEach(note => template += note.NoteTemplate)
     setHTML('activeNote', note.NoteTemplate)
 }
 
@@ -26,7 +24,6 @@ export class NotesController{
         console.log('Hello from the NotesController');
         appState.on('activeNote', _drawActiveNote)
         appState.on('notes', _drawNotesList)
-        // _drawActiveNote()
     }
 
     createNote(){
@@ -37,6 +34,7 @@ export class NotesController{
         console.log(formData)
         form.reset()
         notesService.createNote(formData)
+        
     } catch (error){
         Pop.error(error)
         console.error(error)
@@ -52,5 +50,15 @@ export class NotesController{
         }
     }
 
+    async deleteNote(noteId){
+        try{
+            const yes = await Pop.confirm('Are you sure you want to delete this note?')
+            if (!yes) { return }
+            notesService.deleteNote(noteId)
+        } catch (error){
+            Pop.error(error)
+        }
+
+    }
 
 }
