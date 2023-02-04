@@ -20,27 +20,33 @@
   <header>
     <nav class="navbar navbar-dark navbar-expand bg-dark text-light no-select d-flex justify-content-between">
       <a class="navbar-brand ms-3" href="#">
-        <span class="ms-2 fs-1"><i class="mdi mdi-alpha-j-circle-outline"></i> <i class="mdi mdi-alpha-o-circle-outline"> </i><i class="mdi mdi-alpha-t-circle-outline"></i></span>
+        <span class="ms-2 fs-1"><i class="mdi mdi-alpha-j-circle-outline"></i> <i class="mdi mdi-alpha-o-circle-outline"> </i><i class="mdi mdi-alpha-t-circle-outline"></i><i class="mdi mdi-music-note-whole"></i></span>
       </a>
-      <button class="btn btn-primary me-1 mdi mdi-note-text-outline fs-1" type="button" data-bs-toggle="offcanvas" data-bs-target="#staticBackdrop" aria-controls="staticBackdrop">
-</button>
+      <!-- <button class="btn btn-primary me-1 mdi mdi-note-text-outline fs-3" type="button" data-bs-toggle="offcanvas" data-bs-target="#staticBackdrop" aria-controls="staticBackdrop">
+      </button> -->
+      <button class="btn btn-primary me-1" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
+        <i class="mdi mdi-notebook"></i>
+      </button>
     </nav>
   </header>
 
-  <main>
+  <main class="bg-secondary">
     <div class="container-fluid">
-      <div class="row" id="notes">
+      <div class="row justify-content-center" id="activeNote">
 <!-- STUB active note template -->
-        <!-- <div class="col-10 m-auto">
-          <div class="card mt-5 p-0" id="activeNote"> 
-            <div class="row">
-              <div class="col-3 text-center">
+        <!-- <div class="col-10 card mt-5 bg-light">
+          <div class="p-0" id="activeNote"> 
+            <div class="row justify-content-around">
+              <div class="col-3 p-0 text-center">
                 <h1>Title</h1>
                 <p class="m-0">Created: </p>
                 <p class="m-0">Edited: </p>
               </div>
-              <div class="col-8 mt-2 mb-2">
+              <div class="col-7 p-0 mt-2 mb-2">
                 <textarea type="text" class="form-control" name="body" id="noteBody" placeholder="..."></textarea>
+              </div>
+              <div class="col-1 p-0 text-center">
+                <button class="btn btn-danger mdi mdi-delete-circle-outline fs-3 mt-2"></button>
               </div>
             </div>
           </div>
@@ -57,20 +63,22 @@
   </footer>
 
   <!-- Off Canvas -->
-  <div class="offcanvas offcanvas-start bg-dark" data-bs-backdrop="static" tabindex="-1" id="staticBackdrop" aria-labelledby="staticBackdropLabel">
+  <div class="offcanvas offcanvas-start bg-dark" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
   <div class="offcanvas-header">
-    <h5 class="offcanvas-title text-light" id="staticBackdropLabel">Jot Notes</h5>
-    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    <h5 class="offcanvas-title text-light" id="offcanvasExampleLabel">Jot Notes</h5>
+    <button type="button" class="btn-close bg-light" data-bs-dismiss="offcanvas" aria-label="Close"></button>
   </div>
-  <div class="offcanvas-body">
-    <div>
-      <form onsubmit="app.notesController.createNote()">
-        <div>
-          <input type="text" class="form-control" name="title" id="noteTitle" placeholder="Title" required>
-        </div>
-
-      </form>
+  <div class="offcanvas-body text-light">
+    <div class="row" id="notesList">
+      <!-- <div class="col-12">
+        <p>test <i class="mdi mdi-music-note-whole text-${this.color}"></i></p>
+      </div> -->
     </div>
+    <form onsubmit="app.notesController.createNote()">
+        <div class="d-flex">
+          <input type="text" class="form" name="title" id="noteTitle" placeholder="Title" required><input type="color" id="color" name="color" value="#e66465">
+        </div>
+      </form>
   </div>
 </div>
 

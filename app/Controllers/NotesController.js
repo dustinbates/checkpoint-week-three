@@ -5,19 +5,28 @@ import { Pop } from "../Utils/Pop.js";
 import { setHTML } from "../Utils/Writer.js";
 
 
-function _drawNotes(){
+function _drawActiveNote(){
     console.log('draw notes function firing');
+    let note = appState.activeNote
+    // let template = ''
+    // notes.forEach(note => template += note.NoteTemplate)
+    setHTML('activeNote', note.NoteTemplate)
+}
+
+function _drawNotesList(){
+    console.log('draw notes list firing')
     let notes = appState.notes
     let template = ''
-    notes.forEach(note => template += note.NoteTemplate)
-    setHTML('notes', template)
+    notes.forEach(note => template += note.SmallTemplate)
+    setHTML('notesList', template)
 }
 
 export class NotesController{
     constructor(){
         console.log('Hello from the NotesController');
-        appState.on('notes', _drawNotes)
-        _drawNotes()
+        appState.on('activeNote', _drawActiveNote)
+        appState.on('notes', _drawNotesList)
+        // _drawActiveNote()
     }
 
     createNote(){
@@ -33,6 +42,14 @@ export class NotesController{
         console.error(error)
     }
 
+    }
+
+    setActiveNote(noteId){
+        try{
+            notesService.setActiveNote(noteId)
+        } catch (error) {
+            Pop.error(error)
+        }
     }
 
 

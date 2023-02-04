@@ -11,23 +11,32 @@ export class Note{
 
     }
 
-
-
     get NoteTemplate(){
         return `
-        <div class="col-10 m-auto">
-          <div class="card mt-5 p-0" id="activeNote"> 
-            <div class="row">
-              <div class="col-3 text-center">
-                <h1>${this.title}</h1>
-                <p class="m-0">Created:${this.date} </p>
-                <p class="m-0">Edited: </p>
-              </div>
-              <div class="col-8 mt-2 mb-2">
-                <textarea type="text" class="form-control" name="body" id="noteBody" placeholder="...">${this.body}</textarea>
-              </div>
+    <div class="col-10 card mt-5">
+        <div class="p-0" id="activeNote"> 
+            <div class="row justify-content-around">
+                <div class="col-3 p-0 text-center">
+                    <h1>${this.title}<i class="mdi mdi-music-note-whole" style="color: ${this.color}"></i></h1>
+                    <p class="m-0">Created: ${this.date} </p>
+                    <p class="m-0">Edited: ${this.date} </p>
+                </div>
+                <div class="col-7 p-0 mt-2 mb-2">
+                    <textarea type="text" class="form-control" name="body" id="noteBody" placeholder="Start a new note...">${this.body}</textarea>
+                </div>
+                <div class="col-1 p-0 text-center">
+                <button class="btn btn-danger mdi mdi-trash-can-outline fs-3 mt-2"></button>
+                </div>
             </div>
-          </div>
+        </div>
+    </div>
+        `
+    }
+
+    get SmallTemplate(){
+        return `
+        <div class="col-12 selectable" onclick="app.notesController.setActiveNote('${this.id}')">
+            <p>${this.title}<i class="mdi mdi-music-note-whole" style="color: ${this.color}"></i></p>
         </div>
         `
     }
