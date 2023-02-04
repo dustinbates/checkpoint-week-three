@@ -9,7 +9,7 @@ import { setHTML } from "../Utils/Writer.js";
 function _drawActiveNote(){
     console.log('draw notes function firing');
     let note = appState.activeNote
-    setHTML('activeNote', note.NoteTemplate)
+    setHTML('activeNote', note?.NoteTemplate)
 }
 
 function _drawNotesList(){
@@ -20,21 +20,28 @@ function _drawNotesList(){
     setHTML('notesList', template)
 }
 
+function _drawLandingPage(){
+    let note = appState.activeNote
+    setHTML('activeNote', note?.LandingPageTemplate)
+}
+
 export class NotesController{
     constructor(){
         console.log('Hello from the NotesController');
         _drawNotesList()
         _drawActiveNote()
+        // _drawLandingPage()
         appState.on('activeNote', _drawActiveNote)
         appState.on('notes', _drawNotesList)
     }
 
     createNote(){
     try{
-        window.event.preventDefault()
-        const form = window.event.target
+        window.event?.preventDefault()
+        const form = window.event?.target
         const formData = getFormData(form)
         // console.log(formData)
+        // @ts-ignore
         form.reset()
         notesService.createNote(formData)
         
@@ -59,9 +66,25 @@ export class NotesController{
         notesService.deleteNote(noteId)
         saveState('notes', appState.notes)
         appState.emit('notes')
+        saveState('activeNote', appState.activeNote)
+        appState.emit('activeNote')
+        _drawLandingPage()
     } catch (error){
         Pop.error(error)
     }
     }
 
+    updateNote(){
+    try{
+        let textarea = document.getElementById('noteBody')
+        let updatedBody = textarea.value
+        console.log('updated', updatedBody)
+        notesService.updateNote(updatedBody)
+
+        }
+    catch (error){
+        console.error(error)
+        Pop.error(error)
+    }
+    }
 }

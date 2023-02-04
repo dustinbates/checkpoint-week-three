@@ -22,7 +22,7 @@ export class Note{
                     <p class="m-0">Edited: ${this.date} </p>
                 </div>
                 <div class="col-7 p-0 mt-2 mb-2">
-                    <textarea type="text" class="form-control" name="body" id="noteBody" placeholder="Start a new note...">${this.body}</textarea>
+                    <textarea type="text" class="form-control" name="body" id="noteBody" onblur="app.notesController.updateNote()" placeholder="Start a new note...">${this.body}</textarea>
                 </div>
                 <div class="col-1 p-0 text-center">
                 <button class="btn btn-danger mdi mdi-trash-can-outline fs-3 mt-2" onclick="app.notesController.deleteNote('${this.id}')"></button>
@@ -37,6 +37,23 @@ export class Note{
         return `
         <div class="col-12 selectable" onclick="app.notesController.setActiveNote('${this.id}')">
             <p>${this.title}<i class="mdi mdi-music-note-whole" style="color: ${this.color}"></i></p>
+        </div>
+        `
+    }
+
+    get LandingPageTemplate(){
+        return `
+        <div class="col-10 card mt-5 bg-light">
+            <div class="p-0" id="landing-page">
+                <div class="row">
+                    <div class="col-6 text-center">
+                        <img src="https://via.placeholder.com/200" alt="">
+                    </div>
+                    <div class="col-6 d-flex align-items-center">
+                        <p>Click the note icon in the top right to get started</p>
+                    </div>
+                </div>
+            </div>
         </div>
         `
     }
