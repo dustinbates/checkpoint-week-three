@@ -2,6 +2,7 @@ import { appState } from "../AppState.js";
 import { notesService } from "../Services/NotesService.js";
 import { getFormData } from "../Utils/FormHandler.js";
 import { Pop } from "../Utils/Pop.js";
+import { saveState } from "../Utils/Store.js";
 import { setHTML } from "../Utils/Writer.js";
 
 
@@ -22,6 +23,8 @@ function _drawNotesList(){
 export class NotesController{
     constructor(){
         console.log('Hello from the NotesController');
+        _drawNotesList()
+        _drawActiveNote()
         appState.on('activeNote', _drawActiveNote)
         appState.on('notes', _drawNotesList)
     }
@@ -31,7 +34,7 @@ export class NotesController{
         window.event.preventDefault()
         const form = window.event.target
         const formData = getFormData(form)
-        console.log(formData)
+        // console.log(formData)
         form.reset()
         notesService.createNote(formData)
         
@@ -39,26 +42,26 @@ export class NotesController{
         Pop.error(error)
         console.error(error)
     }
-
     }
 
     setActiveNote(noteId){
-        try{
-            notesService.setActiveNote(noteId)
-        } catch (error) {
-            Pop.error(error)
-        }
+    try{
+        notesService.setActiveNote(noteId)
+    } catch (error) {
+        Pop.error(error)
+    }
     }
 
     async deleteNote(noteId){
-        try{
-            const yes = await Pop.confirm('Are you sure you want to delete this note?')
-            if (!yes) { return }
-            notesService.deleteNote(noteId)
-        } catch (error){
-            Pop.error(error)
-        }
-
+    try{
+        const yes = await Pop.confirm('Are you sure you want to delete this note?')
+        if (!yes) { return }
+        notesService.deleteNote(noteId)
+        saveState('notes', appState.notes)
+        appState.emit('notes')
+    } catch (error){
+        Pop.error(error)
+    }
     }
 
 }
