@@ -1,5 +1,5 @@
 import { appState } from "../AppState.js";
-import { Note } from "../Models/Note.js";
+import { LandingPageTemplate, Note } from "../Models/Note.js";
 import { saveState } from "../Utils/Store.js";
 import { setHTML } from "../Utils/Writer.js";
 
@@ -16,19 +16,20 @@ class NotesService {
 
     deleteNote(noteId) {
         let foundNote = appState.notes.findIndex(n => n.id == noteId)
-        console.log(foundNote);
+        console.log('I found the note', foundNote);
         appState.notes.splice(foundNote, 1)
-        // appState.emit('notes')
-        setHTML('activeNote', appState.activeNote?.LandingPageTemplate)
-        saveState('activeNote', appState.activeNote)
+        saveState('notes', appState.notes)
+        appState.emit('notes')
+        saveState('activeNote', null)
+        appState.activeNote = null
+        console.log(appState.activeNote);
         appState.emit('activeNote')
     }
 
     setActiveNote(noteId) {
+        console.log('Sup yo from NotesService');
         let foundNote = appState.notes.find(n => n.id == noteId)
-        // console.log(noteId);
-        // @ts-ignore
-        appState.activeNote = foundNote
+        appState.activeNote = foundNote || null
         saveState('activeNote', appState.activeNote)
         appState.emit('activeNote')
     }

@@ -1,3 +1,4 @@
+import { appState } from "../AppState.js"
 import { generateId } from "../Utils/generateId.js"
 
 
@@ -41,20 +42,18 @@ export class Note{
         `
     }
 
-    get LandingPageTemplate(){
-        return `
-        <div class="col-10 card mt-5 bg-light">
-            <div class="p-0" id="landing-page">
-                <div class="row">
-                    <div class="col-6 text-center">
-                        <img src="https://via.placeholder.com/200" alt="">
-                    </div>
-                    <div class="col-6 d-flex align-items-center">
-                        <p>Click the note icon in the top right to get started</p>
-                    </div>
+}
+
+export const LandingPageTemplate = ` 
+    <div class="col-10 card mt-5 bg-light">
+        <div class="p-0" id="landing-page">
+            <div class="row">
+                <div class="col-6 text-center">
+                    <img src="https://via.placeholder.com/200" alt="">
+                </div>
+                <div class="col-6 d-flex align-items-center">
+                    <p>Click the note icon in the top right to get started</p>
                 </div>
             </div>
         </div>
-        `
-    }
-}
+    </div>`

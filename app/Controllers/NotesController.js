@@ -1,4 +1,5 @@
 import { appState } from "../AppState.js";
+import { LandingPageTemplate } from "../Models/Note.js";
 import { notesService } from "../Services/NotesService.js";
 import { getFormData } from "../Utils/FormHandler.js";
 import { Pop } from "../Utils/Pop.js";
@@ -7,9 +8,16 @@ import { setHTML } from "../Utils/Writer.js";
 
 
 function _drawActiveNote(){
-    console.log('draw notes function firing');
+    console.log('draw notes function firing', appState.activeNote);
     let note = appState.activeNote
-    setHTML('activeNote', note?.NoteTemplate)
+    if (note?.title ){
+        console.log('There is a note');
+        setHTML('activeNote', note.NoteTemplate)
+    } else{
+        console.log('There is NO note');
+        setHTML('activeNote', LandingPageTemplate)
+    }
+
 }
 
 function _drawNotesList(){
@@ -20,17 +28,11 @@ function _drawNotesList(){
     setHTML('notesList', template)
 }
 
-function _drawLandingPage(){
-    let note = appState.activeNote
-    setHTML('activeNote', note?.LandingPageTemplate)
-}
-
 export class NotesController{
     constructor(){
         console.log('Hello from the NotesController');
-        _drawNotesList()
         _drawActiveNote()
-        // _drawLandingPage()
+        _drawNotesList()
         appState.on('activeNote', _drawActiveNote)
         appState.on('notes', _drawNotesList)
     }
@@ -64,11 +66,6 @@ export class NotesController{
         const yes = await Pop.confirm('Are you sure you want to delete this note?')
         if (!yes) { return }
         notesService.deleteNote(noteId)
-        saveState('notes', appState.notes)
-        appState.emit('notes')
-        saveState('activeNote', appState.activeNote)
-        appState.emit('activeNote')
-        _drawLandingPage()
     } catch (error){
         Pop.error(error)
     }
@@ -80,7 +77,6 @@ export class NotesController{
         let updatedBody = textarea.value
         console.log('updated', updatedBody)
         notesService.updateNote(updatedBody)
-
         }
     catch (error){
         console.error(error)
