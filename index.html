@@ -18,14 +18,12 @@
 
 <body>
   <header>
-    <nav class="navbar navbar-dark navbar-expand bg-dark text-light no-select d-flex justify-content-between">
-      <a class="navbar-brand ms-3" href="#">
+    <nav class="navbar navbar-dark navbar-expand bg-dark text-light no-select d-flex justify-content-between px-4">
+      <a class="navbar-brand p-0" href="#">
         <span class="ms-2 fs-1"><i class="mdi mdi-alpha-j-circle-outline"></i> <i class="mdi mdi-alpha-o-circle-outline"> </i><i class="mdi mdi-alpha-t-circle-outline"></i><i class="mdi mdi-music-note-whole"></i></span>
       </a>
-      <!-- <button class="btn btn-primary me-1 mdi mdi-note-text-outline fs-3" type="button" data-bs-toggle="offcanvas" data-bs-target="#staticBackdrop" aria-controls="staticBackdrop">
-      </button> -->
-      <button class="btn btn-primary me-1" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
-        <i class="mdi mdi-notebook"></i>
+      <button class="btn btn-primary me-2 border-radius" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
+        <i class="mdi mdi-notebook fs-3"></i>
       </button>
     </nav>
   </header>
@@ -79,8 +77,8 @@
   <!-- Off Canvas -->
   <div class="offcanvas offcanvas-start bg-dark" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
   <div class="offcanvas-header">
-    <h5 class="offcanvas-title text-light" id="offcanvasExampleLabel">Jot Notes</h5>
-    <button type="button" class="btn-close bg-light" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    <h5 class="offcanvas-title text-light" id="offcanvasExampleLabel">Jot Notes: <b id="totalNotes">${app.counter}</b></h5>
+    <button type="button" class="btn-close bg-light border-radius" data-bs-dismiss="offcanvas" aria-label="Close"></button>
   </div>
   <div class="offcanvas-body text-light">
     <div class="row" id="notesList">
@@ -89,10 +87,10 @@
       </div> -->
     </div>
     <form onsubmit="app.notesController.createNote()">
-        <div class="d-flex justify-content-between">
-          <input type="text" class="form" name="title" id="noteTitle" placeholder="Title" required>
-          <input type="color" class="color-picker" id="color" name="color" value="#0000ff">
-          <button type="submit" class="btn btn-success text-light mdi mdi-note-plus-outline" data-bs-dismiss="offcanvas"></button>
+        <div class="d-flex justify-content-baseline align-items-center p-2">
+          <input type="text" class="form" name="title" id="noteTitle" placeholder="Title" minlength="3" maxlength="15" required>
+          <input type="color" class="color-picker mx-5 ms-3" id="color" name="color" value="#0000ff">
+          <button type="submit" class="btn btn-success text-light mdi mdi-plus fs-1 p-0 border-radius" data-bs-dismiss="offcanvas"></button>
         </div>
       </form>
   </div>

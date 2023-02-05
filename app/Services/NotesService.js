@@ -7,6 +7,9 @@ import { setHTML } from "../Utils/Writer.js";
 class NotesService {
     updateNote(updatedBody) {
         let activeNote = appState.activeNote
+        let date = new Date()
+        let otherDate = 'Edited: ' + (date.getMonth()+1) + "/" + date.getDate() + "/" + date.getFullYear() + "  " + date.toLocaleTimeString('en-US')
+        activeNote.edited = otherDate
         activeNote.body = updatedBody
         saveState('activeNote', appState.activeNote)
         saveState('notes', appState.notes)
@@ -37,6 +40,10 @@ class NotesService {
     createNote(formData){
         let newNote = new Note(formData)
         // console.log(newNote);
+        let date = new Date()
+        let currentDate =  (date.getMonth()+1) + "/" + date.getDate() + "/" + date.getFullYear() + "  " + date.toLocaleTimeString('en-US')
+        newNote.date = currentDate
+
         appState.notes.push(newNote)
         saveState('notes', appState.notes)
         appState.emit('notes')

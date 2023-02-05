@@ -8,7 +8,8 @@ export class Note{
         this.title = data.title
         this.color = data.color
         this.body = data.body || ''
-        this.date = data.date || new Date().toLocaleTimeString('en-US')
+        this.date = data.date || ''
+        this.edited = data.edited || ''
 
     }
 
@@ -16,17 +17,17 @@ export class Note{
         return `
     <div class="col-10 card mt-5">
         <div class="p-0" id="activeNote"> 
-            <div class="row justify-content-around">
-                <div class="col-3 p-0 text-center">
-                    <h1>${this.title}<i class="mdi mdi-music-note-whole" style="color: ${this.color}"></i></h1>
+            <div class="row justify-content-between">
+                <div class="col-4 p-0 text-center">
+                    <h4>${this.title}<i class="mdi mdi-music-note-whole fs-3" style="color: ${this.color}"></i></h4>
                     <p class="m-0">Created: ${this.date} </p>
-                    <p class="m-0">Edited: ${this.date} </p>
+                    <p class="m-0">${this.edited} </p>
                 </div>
-                <div class="col-7 p-0 mt-2 mb-2">
+                <div class="col-6 p-0 mt-2 mb-2">
                     <textarea type="text" class="form-control" name="body" id="noteBody" onblur="app.notesController.updateNote()" placeholder="Start a new note...">${this.body}</textarea>
                 </div>
-                <div class="col-1 p-0 text-center">
-                <button class="btn btn-danger mdi mdi-trash-can-outline fs-3 mt-2" onclick="app.notesController.deleteNote('${this.id}')"></button>
+                <div class="col-1 p-0 d-flex justify-content-end">
+                <button class="btn btn-danger mdi mdi-trash-can-outline fs-3 border-radius" onclick="app.notesController.deleteNote('${this.id}')"></button>
                 </div>
             </div>
         </div>
@@ -36,8 +37,8 @@ export class Note{
 
     get SmallTemplate(){
         return `
-        <div class="col-12 selectable" onclick="app.notesController.setActiveNote('${this.id}')">
-            <p>${this.title}<i class="mdi mdi-music-note-whole" style="color: ${this.color}"></i></p>
+        <div class="col-12 selectable py-1" onclick="app.notesController.setActiveNote('${this.id}')">
+            <b>${this.title}<i class="mdi mdi-music-note-whole" style="color: ${this.color}"></i></b>
         </div>
         `
     }
@@ -45,15 +46,11 @@ export class Note{
 }
 
 export const LandingPageTemplate = ` 
-    <div class="col-10 card mt-5 bg-light">
+    <div class="col-10 card-landing mt-4 bg-light">
         <div class="p-0" id="landing-page">
-            <div class="row">
-                <div class="col-6 text-center">
-                    <img src="https://via.placeholder.com/200" alt="">
-                </div>
-                <div class="col-6 d-flex align-items-center">
-                    <p>Click the note icon in the top right to get started</p>
-                </div>
+            <div>
+            <p class="landing-text"> Click the notebook <br> icon to get started</p>
             </div>
         </div>
     </div>`
+

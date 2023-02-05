@@ -13,6 +13,8 @@ class AppState extends EventEmitter {
 
   /** @type {import('./Models/Note').Note|null} */
   activeNote = loadState('activeNote', Note) 
+
+  counter = 0 
 }
 
 export const appState = new Proxy(new AppState(), {

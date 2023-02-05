@@ -4,7 +4,7 @@ import { notesService } from "../Services/NotesService.js";
 import { getFormData } from "../Utils/FormHandler.js";
 import { Pop } from "../Utils/Pop.js";
 import { saveState } from "../Utils/Store.js";
-import { setHTML } from "../Utils/Writer.js";
+import { setHTML, setText } from "../Utils/Writer.js";
 
 
 function _drawActiveNote(){
@@ -17,7 +17,6 @@ function _drawActiveNote(){
         console.log('There is NO note');
         setHTML('activeNote', LandingPageTemplate)
     }
-
 }
 
 function _drawNotesList(){
@@ -28,11 +27,20 @@ function _drawNotesList(){
     setHTML('notesList', template)
 }
 
+function _totalNotes(){
+    let total = 0
+    for(let i = 0; i <= appState.notes.length; i++){
+        total += 1
+    }
+    setText('totalNotes', total-1)
+}
+
 export class NotesController{
     constructor(){
         console.log('Hello from the NotesController');
         _drawActiveNote()
         _drawNotesList()
+        _totalNotes()
         appState.on('activeNote', _drawActiveNote)
         appState.on('notes', _drawNotesList)
     }
@@ -46,6 +54,7 @@ export class NotesController{
         // @ts-ignore
         form.reset()
         notesService.createNote(formData)
+        _totalNotes()
         
     } catch (error){
         Pop.error(error)
@@ -66,6 +75,7 @@ export class NotesController{
         const yes = await Pop.confirm('Are you sure you want to delete this note?')
         if (!yes) { return }
         notesService.deleteNote(noteId)
+        _totalNotes()
     } catch (error){
         Pop.error(error)
     }
