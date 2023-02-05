@@ -2,9 +2,10 @@
 textarea{
     width: 20vw;
     height: 50vh;
-    background-color: bisque !important;
+    background-color: rgba(255, 228, 196, 0.834) !important;
     overflow-y: auto;
     margin-top: 1em;
+    box-shadow: .5px .5px .5px rgba(0, 0, 0, 0.469);
 }
 
 .color-picker{
@@ -53,14 +54,14 @@ textarea{
 }
 
 p{
-    font-size: .75em !important;
+    font-size: large !important;
     color: rgba(0, 0, 0, 0.571)
 }
 
 .card{
     padding: 2em;
     padding-top: 1em;
-    background-color: whitesmoke;
+    background-color: rgba(245, 245, 245, 0.58);
 }
 
 .mdi-trash-can-outline{
@@ -82,7 +83,7 @@ p{
 }
 
 .landing-text{
-    font-size: .1em;
+    font-size: larger !important;
     display: flex;
     justify-content: center;
     align-items: center;

@@ -9,7 +9,9 @@ class NotesService {
         let activeNote = appState.activeNote
         let date = new Date()
         let otherDate = 'Edited: ' + (date.getMonth()+1) + "/" + date.getDate() + "/" + date.getFullYear() + "  " + date.toLocaleTimeString('en-US')
+        // @ts-ignore
         activeNote.edited = otherDate
+        // @ts-ignore
         activeNote.body = updatedBody
         saveState('activeNote', appState.activeNote)
         saveState('notes', appState.notes)

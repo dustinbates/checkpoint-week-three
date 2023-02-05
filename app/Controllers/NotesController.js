@@ -84,6 +84,7 @@ export class NotesController{
     updateNote(){
     try{
         let textarea = document.getElementById('noteBody')
+        // @ts-ignore
         let updatedBody = textarea.value
         console.log('updated', updatedBody)
         notesService.updateNote(updatedBody)
